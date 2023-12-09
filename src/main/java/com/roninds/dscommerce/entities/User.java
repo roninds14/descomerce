@@ -22,6 +22,7 @@ public class User {
     private Long id;
     private String name;
     @EqualsAndHashCode.Include
+    @Column(unique = true)
     private String email;
     private String phone;
     private Date birthDate;
