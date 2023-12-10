@@ -1,7 +1,9 @@
 package com.roninds.dscommerce.entities;
 
+import com.roninds.dscommerce.dto.ProductDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -41,6 +43,13 @@ public class Product {
         this.description = description;
         this.price = price;
         this.imgUrl = imgUrl;
+    }
+
+    public Product(@NotNull ProductDTO productDTO){
+        this.name = productDTO.getName();
+        this.description = productDTO.getDescription();
+        this.price = productDTO.getPrice();
+        this.imgUrl = productDTO.getImgUrl();
     }
 
     public List<Order> getOrders(){

@@ -19,15 +19,25 @@ public class ProductService {
     private ProductRepository repository;
 
     @Transactional(readOnly = true)
-    public ProductDTO findById(Long id){
+    public ProductDTO findById(Long id) {
         Optional<Product> result = repository.findById(id);
         Product product = result.get();
         return new ProductDTO(product);
     }
 
-    public Page<ProductDTO> findAll(Pageable pageable){
+    @Transactional(readOnly = true)
+    public Page<ProductDTO> findAll(Pageable pageable) {
         Page<Product> result = repository.findAll(pageable);
 
         return result.map(ProductDTO::new);
+    }
+
+    @Transactional
+    public ProductDTO insert(ProductDTO productDTO) {
+        Product product = new Product(productDTO);
+
+        Product productSaved = repository.save(product);
+
+        return new ProductDTO(productSaved);
     }
 }
