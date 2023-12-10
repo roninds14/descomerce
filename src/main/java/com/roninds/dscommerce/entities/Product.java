@@ -45,13 +45,6 @@ public class Product {
         this.imgUrl = imgUrl;
     }
 
-    public Product(@NotNull ProductDTO productDTO){
-        this.name = productDTO.getName();
-        this.description = productDTO.getDescription();
-        this.price = productDTO.getPrice();
-        this.imgUrl = productDTO.getImgUrl();
-    }
-
     public List<Order> getOrders(){
         return  items.stream().map(OrderItem::getOrder).toList();
     }
