@@ -23,7 +23,6 @@ public class ProductController {
         ProductDTO productDTO = service.findById(id);
 
         return ResponseEntity.ok(productDTO);
-
     }
 
     @GetMapping

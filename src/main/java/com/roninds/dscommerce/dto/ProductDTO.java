@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 public class ProductDTO {
 
