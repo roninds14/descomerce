@@ -25,4 +25,8 @@ public class Category {
     @Setter(AccessLevel.NONE)
     private Set<Product> products = new HashSet<Product>();
 
+    public Category(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

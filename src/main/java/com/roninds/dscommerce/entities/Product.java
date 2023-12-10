@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -29,4 +30,19 @@ public class Product {
     @Setter(AccessLevel.NONE)
     private Set<Category> categories = new HashSet<Category>();
 
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<OrderItem>();
+
+    public Product(Long id, String name, String description, Double price, String imgUrl) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
+    }
+
+    public List<Order> getOrders(){
+        return  items.stream().map(OrderItem::getOrder).toList();
+    }
 }

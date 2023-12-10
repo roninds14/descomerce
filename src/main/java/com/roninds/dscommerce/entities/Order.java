@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
@@ -29,4 +31,20 @@ public class Order {
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
+
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<OrderItem>();
+
+    public Order(Long id, Instant moment, OrderStatus status, User client, Payment payment) {
+        this.id = id;
+        this.moment = moment;
+        this.status = status;
+        this.client = client;
+        this.payment = payment;
+    }
+
+    public List<Product> getProducts(){
+        return items.stream().map(OrderItem::getProduct).toList();
+    }
 }
