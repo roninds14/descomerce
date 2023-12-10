@@ -9,6 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem {
