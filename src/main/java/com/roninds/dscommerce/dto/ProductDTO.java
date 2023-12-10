@@ -4,6 +4,7 @@ import com.roninds.dscommerce.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class ProductDTO {
     private Double price;
     private String imgUrl;
 
-    public ProductDTO(Product product) {
+    public ProductDTO(@NotNull Product product) {
         this.id = product.getId();
         this.name = product.getName();
         this.description = product.getDescription();
