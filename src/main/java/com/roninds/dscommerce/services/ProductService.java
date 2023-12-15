@@ -1,6 +1,7 @@
 package com.roninds.dscommerce.services;
 
 import com.roninds.dscommerce.dto.ProductDTO;
+import com.roninds.dscommerce.dto.ProductMinDTO;
 import com.roninds.dscommerce.entities.Product;
 import com.roninds.dscommerce.repositories.ProductRepository;
 import com.roninds.dscommerce.services.exceptions.DatabaseException;
@@ -35,6 +36,13 @@ public class ProductService {
         Page<Product> result = repository.searchByName(name, pageable);
 
         return result.map(ProductDTO::new);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ProductMinDTO> findMinAll(String name, Pageable pageable) {
+        Page<Product> result = repository.searchByName(name, pageable);
+
+        return result.map(ProductMinDTO::new);
     }
 
     @Transactional
