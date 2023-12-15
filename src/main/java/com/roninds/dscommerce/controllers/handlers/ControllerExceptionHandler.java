@@ -3,6 +3,7 @@ package com.roninds.dscommerce.controllers.handlers;
 import com.roninds.dscommerce.dto.CustomError;
 import com.roninds.dscommerce.dto.ValidationError;
 import com.roninds.dscommerce.services.exceptions.DatabaseException;
+import com.roninds.dscommerce.services.exceptions.ForbiddenException;
 import com.roninds.dscommerce.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +41,13 @@ public class ControllerExceptionHandler {
             err.addError(f.getField(), f.getDefaultMessage());
         }
 
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<CustomError> forbiddenBase(@NotNull ForbiddenException e, @NotNull HttpServletRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        CustomError err = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }
