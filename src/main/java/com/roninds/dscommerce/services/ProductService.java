@@ -1,7 +1,9 @@
 package com.roninds.dscommerce.services;
 
+import com.roninds.dscommerce.dto.CategoryDTO;
 import com.roninds.dscommerce.dto.ProductDTO;
 import com.roninds.dscommerce.dto.ProductMinDTO;
+import com.roninds.dscommerce.entities.Category;
 import com.roninds.dscommerce.entities.Product;
 import com.roninds.dscommerce.repositories.ProductRepository;
 import com.roninds.dscommerce.services.exceptions.DatabaseException;
@@ -77,6 +79,13 @@ public class ProductService {
         product.setDescription(productDTO.getDescription());
         product.setPrice(productDTO.getPrice());
         product.setImgUrl(productDTO.getImgUrl());
+
+        product.getCategories().clear();
+        for(CategoryDTO catDTO: productDTO.getCategories()){
+            Category cat = new Category();
+            cat.setId(catDTO.getId());
+            product.getCategories().add(cat);
+        }
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)
