@@ -3,6 +3,7 @@ package com.roninds.dscommerce.dto;
 import com.roninds.dscommerce.entities.Order;
 import com.roninds.dscommerce.entities.OrderItem;
 import com.roninds.dscommerce.entities.enums.OrderStatus;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 
 import java.time.Instant;
@@ -18,6 +19,7 @@ public class OrderDTO {
     private  ClientDTO client;
     private  PaymentDTO payment;
 
+    @NotEmpty(message = "Deve ter apenas um item")
     private List<OrderItemDTO> items = new ArrayList<>();
 
     public OrderDTO(Long id, Instant moment, OrderStatus status, ClientDTO client, PaymentDTO payment) {
